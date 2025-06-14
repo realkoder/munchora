@@ -1,0 +1,15 @@
+services:
+  postgresdb:
+    container_name: postgresdb
+    image: postgres:latest
+    ports:
+      - "5431:5432"
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: munchora
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+    name: postgres_data
