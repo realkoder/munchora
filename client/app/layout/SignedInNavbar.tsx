@@ -68,7 +68,7 @@ export default function Navbar() {
           </div>
           <Button
             className="bg-sky-500 hover:bg-sky-500 text-white"
-            onClick={signOutUser}
+            onClick={() => signOutUser()}
           >
             Sign Out
           </Button>

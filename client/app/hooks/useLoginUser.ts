@@ -10,6 +10,7 @@ const useLoginUser = () => {
     const [userLogin, setUserlogin] = useAtom(userLoginAtom);
     const { fetchData: postLogin } = useFetch<ILoginResponse>();
     const { fetchData: postUser } = useFetch<ICreateUser>();
+    const { fetchData: signOut } = useFetch<{ message: string }>();
     const navigate = useNavigate();
 
     const createNewUser = async (user: ICreateUser) => {
@@ -46,9 +47,16 @@ const useLoginUser = () => {
         }
     }
 
-    const signOutUser = () => {
+    const signOutUser = async () => {
         setUserlogin(null);
-        navigate("/")
+        const signedOutRes = await signOut("logout", { method: "DELETE" })
+
+        if (signedOutRes.message) {
+            navigate("/")
+        } else {
+            toast.info("Could not sign you out...")
+        }
+
     }
 
     return { createNewUser, loginUser, signOutUser };

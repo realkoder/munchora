@@ -17,6 +17,5 @@ export interface IUser {
 }
 
 export interface ILoginResponse {
-    token: string;
     user: IUser;
 }
