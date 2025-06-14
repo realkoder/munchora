@@ -2,7 +2,6 @@ import { useState } from "react";
 import type { Route } from "./+types/home";
 import {
   BookOpen,
-  ChefHat,
   Clock,
   Heart,
   Plus,
@@ -14,6 +13,8 @@ import { NavLink } from "react-router";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { Badge } from "~/components/ui/badge";
+import { useAtomValue } from "jotai";
+import { userLoginAtom } from "~/atoms/userLoginAtom";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -23,6 +24,7 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+  const userLogin = useAtomValue(userLoginAtom);
   const [recentRecipes] = useState([
     {
       id: 1,
@@ -52,11 +54,10 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        
         {/* Welcome Section */}
         <div className="text-left mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Welcome back, Chef!
+            Welcome back, {userLogin?.user.fullname}!
           </h1>
           <p className="text-gray-600">
             Ready to create something delicious today?

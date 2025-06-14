@@ -3,13 +3,15 @@ import { Footer } from "./Footer";
 import Navbar from "./Navbar";
 import { useState } from "react";
 import SignedInNavbar from "./SignedInNavbar";
+import { useAtomValue } from "jotai";
+import { userLoginAtom } from "~/atoms/userLoginAtom";
 
 export default function layoutNavbar() {
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const userLogin = useAtomValue(userLoginAtom);
 
   return (
     <div className="min-h-screen text-center flex flex-col">
-      {isSignedIn ? <SignedInNavbar /> : <Navbar />}
+      {userLogin?.user.id ? <SignedInNavbar /> : <Navbar />}
       <div className={"flex-1"}>
         <Outlet />
       </div>

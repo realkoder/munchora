@@ -1,7 +1,7 @@
 import type React from "react";
 import { useState } from "react";
-import { ChefHat, Eye, EyeOff } from "lucide-react";
-import { NavLink, useNavigate } from "react-router";
+import { Eye, EyeOff } from "lucide-react";
+import { useNavigate } from "react-router";
 import {
   Card,
   CardContent,
@@ -12,10 +12,11 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
+import useLoginUser from "~/hooks/useLoginUser";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
-    name: "",
+    fullname: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -24,6 +25,7 @@ export default function SignUp() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   let navigate = useNavigate();
+  const { createNewUser, loginUser } = useLoginUser();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
@@ -41,11 +43,29 @@ export default function SignUp() {
 
     setIsLoading(true);
 
-    // Simulate account creation
-    setTimeout(() => {
-      setIsLoading(false);
-      navigate("/home");
-    }, 1500);
+    const newUser = {
+      fullname: formData.fullname,
+      email: formData.email,
+      password: formData.password,
+      password_confirmation: formData.confirmPassword,
+    };
+
+    const isNewUserCreated = await createNewUser(newUser);
+
+    if (isNewUserCreated) {
+      const isUserLoggedIn = await loginUser(formData.email, formData.password);
+      if (isUserLoggedIn) {
+        setTimeout(() => {
+          setIsLoading(false);
+          navigate("/home");
+        }, 1500);
+      }
+    } else {
+      setTimeout(() => {
+        setIsLoading(false);
+        navigate("/home");
+      }, 1500);
+    }
   };
 
   return (
@@ -53,7 +73,7 @@ export default function SignUp() {
       <CardHeader className="text-center">
         <CardTitle className="text-2xl font-bold">Create Account</CardTitle>
         <CardDescription>
-          Join FlavorCraft and start your culinary journey
+          Join Munchora and start your culinary journey
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -61,11 +81,12 @@ export default function SignUp() {
           <div className="space-y-2">
             <Label htmlFor="name">Full Name</Label>
             <Input
-              id="name"
-              name="name"
+              id="fullname"
+              name="fullname"
               type="text"
+              autoComplete="additional-name"
               placeholder="Enter your full name"
-              value={formData.name}
+              value={formData.fullname}
               onChange={handleChange}
               required
             />
@@ -80,6 +101,7 @@ export default function SignUp() {
               placeholder="Enter your email"
               value={formData.email}
               onChange={handleChange}
+              autoComplete="email"
               required
             />
           </div>
@@ -93,6 +115,7 @@ export default function SignUp() {
                 type={showPassword ? "text" : "password"}
                 placeholder="Create a password"
                 value={formData.password}
+                autoComplete="new-password"
                 onChange={handleChange}
                 required
               />
@@ -121,6 +144,7 @@ export default function SignUp() {
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder="Confirm your password"
                 value={formData.confirmPassword}
+                autoComplete="current-password"
                 onChange={handleChange}
                 required
               />
@@ -148,18 +172,6 @@ export default function SignUp() {
             {isLoading ? "Creating Account..." : "Create Account"}
           </Button>
         </form>
-
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">
-            Already have an account?{" "}
-            <NavLink
-              to="/sign-in"
-              className="bg-sky-500 hover:text-sky-700 font-medium"
-            >
-              Sign in
-            </NavLink>
-          </p>
-        </div>
       </CardContent>
     </Card>
   );

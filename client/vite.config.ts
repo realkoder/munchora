@@ -6,6 +6,9 @@ import tsconfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
   // This solved: Cannot read properties of null (reading 'useContext') #10455: https://github.com/remix-run/remix/issues/10455
+  optimizeDeps: {
+    exclude: ['com.chrome.devtools.json']
+  },
   server: {
     warmup: {
       clientFiles: [

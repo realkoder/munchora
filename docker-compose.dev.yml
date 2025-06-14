@@ -8,8 +8,8 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: munchora
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - munchora_postgres_data:/var/lib/postgresql/data
 
 volumes:
-  postgres_data:
-    name: postgres_data
+  munchora_postgres_data:
+    name: munchora_postgres_data

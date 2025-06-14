@@ -1,33 +1,34 @@
 import { NavLink, useNavigate } from "react-router";
-import { Button } from "../ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
 import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
+import useLoginUser from "~/hooks/useLoginUser";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import { Label } from "../ui/label";
+import { Button } from "../ui/button";
+import { Eye, EyeOff } from "lucide-react";
 
 export const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const credentialsProvided = password.length > 5 && email.length > 5;
   const [isLoading, setIsLoading] = useState(false);
   let navigate = useNavigate();
+  const { loginUser } = useLoginUser();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate authentication
-    setTimeout(() => {
-      setIsLoading(false);
-      navigate("/home");
-    }, 1500);
+    const isUserLoggedIn = await loginUser(email, password);
+    if (isUserLoggedIn) {
+      setTimeout(() => {
+        setIsLoading(false);
+        navigate("/home");
+      }, 1500);
+    }
+    setIsLoading(false);
   };
 
   return (
@@ -49,6 +50,7 @@ export const SignIn = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              autoComplete="email"
             />
           </div>
 
@@ -61,6 +63,7 @@ export const SignIn = () => {
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
                 required
               />
               <Button
@@ -88,7 +91,7 @@ export const SignIn = () => {
           <Button
             type="submit"
             className="w-full bg-sky-500 hover:bg-sky-600"
-            disabled={isLoading}
+            disabled={isLoading || !credentialsProvided}
           >
             {isLoading ? "Signing in..." : "Sign In"}
           </Button>

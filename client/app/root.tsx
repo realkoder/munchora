@@ -10,6 +10,7 @@ import {
 import type { Route } from "./+types/root";
 import "./app.css";
 import { Toaster } from "sonner";
+import { Provider } from "jotai";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -46,10 +47,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <main>
-      {/* <Provider> */}
-      <Toaster />
-      <Outlet />
-      {/* </Provider> */}
+      <Provider>
+        <Toaster />
+        <Outlet />
+      </Provider>
     </main>
   );
 }

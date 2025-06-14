@@ -66,7 +66,14 @@ Created database 'db/test.sqlite3'
 _Users_ can either signup manually or by _OAuth_
 
 ```bash
-bin/rails generate model User fullname:string email:string provider:string uid:string password_digest:string image_src:string
+bin/rails generate model User fullname:string email:string provider:string uid:string password_digest:string image_src:string --primary_key_type=uuid
+```
+
+Ensure to add the following to make the UUID work:
+
+```ruby
+# Add this to createUsers migration
+enable_extension 'pgcrypto' unless extension_enabled?('pgcrypto')
 ```
 
 Using Gem `bcrypt` -> when you assign to `user.password`, it automatically hashes the password using bcrypt and stores it in the password_digest column.

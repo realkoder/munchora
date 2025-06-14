@@ -1,9 +1,11 @@
 import { NavLink, useLocation } from "react-router";
 import { Button } from "~/components/ui/button";
 import { ChefHat, House, ShoppingCart, Sparkles } from "lucide-react";
+import useLoginUser from "~/hooks/useLoginUser";
 
 export default function Navbar() {
   const location = useLocation();
+  const { signOutUser } = useLoginUser();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -64,7 +66,10 @@ export default function Navbar() {
               </Button>
             </NavLink>
           </div>
-          <Button className="bg-sky-500 hover:bg-sky-500 text-white">
+          <Button
+            className="bg-sky-500 hover:bg-sky-500 text-white"
+            onClick={signOutUser}
+          >
             Sign Out
           </Button>
         </div>
