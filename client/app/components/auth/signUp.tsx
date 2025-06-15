@@ -55,16 +55,9 @@ export default function SignUp() {
     if (isNewUserCreated) {
       const isUserLoggedIn = await loginUser(formData.email, formData.password);
       if (isUserLoggedIn) {
-        setTimeout(() => {
-          setIsLoading(false);
-          navigate("/home");
-        }, 1500);
-      }
-    } else {
-      setTimeout(() => {
-        setIsLoading(false);
         navigate("/home");
-      }, 1500);
+      }
+      setIsLoading(false);
     }
   };
 

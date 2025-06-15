@@ -1,9 +1,14 @@
-import { NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import { Input } from "../ui/input";
 import { useState } from "react";
-import { toast } from "sonner";
 import useLoginUser from "~/hooks/useLoginUser";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { Eye, EyeOff } from "lucide-react";
@@ -14,20 +19,13 @@ export const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const credentialsProvided = password.length > 5 && email.length > 5;
   const [isLoading, setIsLoading] = useState(false);
-  let navigate = useNavigate();
   const { loginUser } = useLoginUser();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    const isUserLoggedIn = await loginUser(email, password);
-    if (isUserLoggedIn) {
-      setTimeout(() => {
-        setIsLoading(false);
-        navigate("/home");
-      }, 1500);
-    }
+    await loginUser(email, password);
     setIsLoading(false);
   };
 

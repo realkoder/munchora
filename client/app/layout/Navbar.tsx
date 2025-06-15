@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from "react-router";
 import { Button } from "~/components/ui/button";
-import { ChefHat } from "lucide-react";
+import { BookA, ChefHat, MessageCircleQuestion } from "lucide-react";
 
 export default function Navbar() {
   const location = useLocation();
@@ -17,13 +17,29 @@ export default function Navbar() {
           </NavLink>
 
           <div className="hidden md:flex items-center space-x-8">
-            <NavLink
-              to="/about"
-              className={`nav-link ${
-                isActive("/about") ? "border-black border-b" : ""
-              } `}
-            >
-              About
+            <NavLink to="/faq">
+              <Button variant="ghost" className="flex items-center">
+                <MessageCircleQuestion />
+                <span
+                  className={`${
+                    isActive("/faq") ? "border-black border-b" : ""
+                  }`}
+                >
+                  FAQ
+                </span>
+              </Button>
+            </NavLink>
+            <NavLink to="/about">
+              <Button variant="ghost" className="flex items-center">
+                <BookA />
+                <span
+                  className={`${
+                    isActive("/about") ? "border-black border-b" : ""
+                  }`}
+                >
+                  About
+                </span>
+              </Button>
             </NavLink>
           </div>
 

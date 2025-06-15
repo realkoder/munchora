@@ -1,6 +1,16 @@
 class Api::V1::AuthController < ApplicationController
   include ActionController::Cookies
 
+  def me
+    authenticate_user!
+  
+    if current_user
+      render json: { user: current_user }
+    else
+      render json: { error: 'Unauthorized' }, status: :unauthorized
+    end
+  end
+
   def login
     user = User.find_by(email: params[:email])
 

@@ -11,6 +11,7 @@ import type { Route } from "./+types/root";
 import "./app.css";
 import { Toaster } from "sonner";
 import { Provider } from "jotai";
+import AuthBootstrapper from "./components/auth/AuthBootstrapper";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -49,6 +50,7 @@ export default function App() {
     <main>
       <Provider>
         <Toaster />
+        <AuthBootstrapper />
         <Outlet />
       </Provider>
     </main>

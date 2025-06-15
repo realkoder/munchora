@@ -1,11 +1,17 @@
 import { NavLink, useLocation } from "react-router";
 import { Button } from "~/components/ui/button";
-import { ChefHat, House, ShoppingCart, Sparkles } from "lucide-react";
-import useLoginUser from "~/hooks/useLoginUser";
+import {
+  BookA,
+  ChefHat,
+  House,
+  MessageCircleQuestion,
+  ShoppingCart,
+  Sparkles,
+} from "lucide-react";
+import UserMenu from "~/components/user-menu";
 
 export default function Navbar() {
   const location = useLocation();
-  const { signOutUser } = useLoginUser();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -19,7 +25,7 @@ export default function Navbar() {
           </NavLink>
           <div className="flex items-center space-x-1">
             <NavLink to="/home">
-              <Button variant="ghost" className="flex items-center space-x-2">
+              <Button variant="ghost" className="flex items-center">
                 <House className="h-4 w-4" />
                 <span
                   className={`${
@@ -31,7 +37,7 @@ export default function Navbar() {
               </Button>
             </NavLink>
             <NavLink to="/recipes">
-              <Button variant="ghost" className="flex items-center space-x-2">
+              <Button variant="ghost" className="flex items-center">
                 <Sparkles className="h-4 w-4" />
                 <span
                   className={`${
@@ -43,7 +49,7 @@ export default function Navbar() {
               </Button>
             </NavLink>
             <NavLink to="/grocery-lists">
-              <Button variant="ghost" className="flex items-center space-x-2">
+              <Button variant="ghost" className="flex items-center">
                 <ShoppingCart className="h-4 w-4" />
                 <span
                   className={`${
@@ -54,8 +60,21 @@ export default function Navbar() {
                 </span>
               </Button>
             </NavLink>
+            <NavLink to="/faq">
+              <Button variant="ghost" className="flex items-center">
+                <MessageCircleQuestion />
+                <span
+                  className={`${
+                    isActive("/faq") ? "border-black border-b" : ""
+                  }`}
+                >
+                  FAQ
+                </span>
+              </Button>
+            </NavLink>
             <NavLink to="/about">
-              <Button variant="ghost">
+              <Button variant="ghost" className="flex items-center">
+                <BookA />
                 <span
                   className={`${
                     isActive("/about") ? "border-black border-b" : ""
@@ -66,12 +85,7 @@ export default function Navbar() {
               </Button>
             </NavLink>
           </div>
-          <Button
-            className="bg-sky-500 hover:bg-sky-500 text-white"
-            onClick={() => signOutUser()}
-          >
-            Sign Out
-          </Button>
+          <UserMenu />
         </div>
       </div>
     </nav>

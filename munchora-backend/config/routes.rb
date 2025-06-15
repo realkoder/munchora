@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/login', to: 'auth#login'
       delete '/logout', to: 'auth#logout'
+      get '/me', to: 'auth#me'
       resources :users, only: [:index, :show, :create, :update, :destroy]
     end
   end

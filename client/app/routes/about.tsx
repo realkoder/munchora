@@ -14,25 +14,24 @@ import { Card, CardContent } from "~/components/ui/card";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "About" },
+    { name: "About", content: "Welcome to Munchora!" },
   ];
 }
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-violet-50">
       
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Hero Section */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            About FlavorCraft
+            About Munchora
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             We're on a mission to make cooking more accessible, creative, and
             enjoyable for everyone. Using the power of AI, we help you discover
-            new flavors and organize your culinary journey.
+            new Munchoras and organize your culinary journey.
           </p>
         </div>
 
@@ -44,14 +43,14 @@ export default function About() {
             </h2>
             <p className="text-lg text-gray-600 mb-6">
               Cooking should be a joyful experience, not a stressful chore.
-              FlavorCraft combines artificial intelligence with culinary
+              Munchora combines artificial intelligence with culinary
               expertise to help you discover new recipes, organize your
               ingredients, and share your love of food with others.
             </p>
             <p className="text-lg text-gray-600">
               Whether you're a beginner cook looking for simple recipes or an
               experienced chef seeking inspiration from global cuisines,
-              FlavorCraft adapts to your needs and helps you create memorable
+              Munchora adapts to your needs and helps you create memorable
               meals.
             </p>
           </div>
@@ -80,7 +79,7 @@ export default function About() {
         {/* Features Deep Dive */}
         <div className="mb-20">
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">
-            How FlavorCraft Works
+            How Munchora Works
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -211,7 +210,7 @@ export default function About() {
           </h2>
           <p className="text-xl text-sky-100 mb-8 max-w-2xl mx-auto">
             Join thousands of home cooks who are already discovering new flavors
-            and simplifying their meal planning with FlavorCraft.
+            and simplifying their meal planning with Munchora.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <NavLink to="/sign-in">
@@ -225,6 +224,5 @@ export default function About() {
           </div>
         </div>
       </div>
-    </div>
   );
 }
