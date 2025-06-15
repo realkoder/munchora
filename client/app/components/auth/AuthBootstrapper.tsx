@@ -5,7 +5,7 @@ import { userLoginAtom } from "~/atoms/userLoginAtom";
 import { useFetch } from "~/lib/api-client";
 import type { ILoginResponse } from "~/types/user.interface";
 
-const noAuthRoutes = ["/", "/fag", "/about"];
+const noAuthRoutes = ["/", "/faq", "/about", "/sign-in"];
 
 export default function AuthBootstrapper() {
   const [userLogin, setUserlogin] = useAtom(userLoginAtom);

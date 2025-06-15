@@ -39,7 +39,7 @@ export default function Index() {
                 culinary discoveries with friends.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <NavLink to="/auth/signup">
+                <NavLink to="/sign-in">
                   <Button
                     size="lg"
                     className="bg-sky-500 hover:bg-sky-600 text-lg px-8 py-3"
@@ -332,8 +332,7 @@ export default function Index() {
                 title: "Get Your Perfect Recipe",
                 description:
                   "Our AI generates a personalized recipe with ingredients, instructions, and cooking tips tailored just for you.",
-                image:
-                  "/recipe.png?height=200&width=300&text=Generated+Recipe",
+                image: "/recipe.png?height=200&width=300&text=Generated+Recipe",
               },
               {
                 step: "3",
@@ -369,7 +368,7 @@ export default function Index() {
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/placeholder.svg?height=400&width=1200&text=Beautiful+Kitchen+Background"
+            src="/kitchen.png?height=400&width=1200&text=Beautiful+Kitchen+Background"
             alt="Beautiful kitchen background"
             className="w-full h-full object-cover"
           />
@@ -383,21 +382,12 @@ export default function Index() {
             Join thousands of home cooks discovering new Munchora's every day
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <NavLink to="/auth/signup">
+            <NavLink to="/sign-in">
               <Button
                 size="lg"
                 className="bg-white text-sky-600 hover:bg-sky-50 text-lg px-8 py-3"
               >
                 Get Started Free
-              </Button>
-            </NavLink>
-            <NavLink to="/recipes">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-sky-600 text-lg px-8 py-3"
-              >
-                Try Demo
               </Button>
             </NavLink>
           </div>
